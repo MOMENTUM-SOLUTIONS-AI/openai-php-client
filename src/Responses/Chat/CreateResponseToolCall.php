@@ -10,11 +10,10 @@ final class CreateResponseToolCall
         public readonly string $id,
         public readonly string $type,
         public readonly CreateResponseToolCallFunction $function,
-        public readonly array $extraContent
     ) {}
 
     /**
-     * @param  array{id: string, type: string, function: array{name: string, arguments: string}, extra_content: array|null}  $attributes
+     * @param  array{id: string, type: string, function: array{name: string, arguments: string}}  $attributes
      */
     public static function from(array $attributes): self
     {
@@ -22,12 +21,11 @@ final class CreateResponseToolCall
             $attributes['id'],
             $attributes['type'],
             CreateResponseToolCallFunction::from($attributes['function']),
-            $attributes['extra_content'] ?? []
         );
     }
 
     /**
-     * @return array{id: string, type: string, function: array{name: string, arguments: string}, extra_content: array}
+     * @return array{id: string, type: string, function: array{name: string, arguments: string}}
      */
     public function toArray(): array
     {
@@ -35,7 +33,6 @@ final class CreateResponseToolCall
             'id' => $this->id,
             'type' => $this->type,
             'function' => $this->function->toArray(),
-            'extra_content' => $this->extraContent,
         ];
     }
 }
